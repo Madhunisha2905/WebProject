@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Category Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: white;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #8a1863;
+        }
+
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            color: #999;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            background: white;
+            gap: 20px;
+        }
+
+        .nav-icons a {
+            text-decoration: none;
+            color: black;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-icons a:hover {
+            color: #8a1863;
+        }
+
+
+        /* Category Menu */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: black;
+            font-size: 0.9em;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #8a1863;
+        }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
+
+        .banner-content {
+            max-width: 50%;
+        }
+
+        .banner-content h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .banner-content .benefits {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .benefit {
+            align-items: center;
+            font-size: 1em;
+            color: #333;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            /* Add space below the benefits */
+        }
+
+
+        .download-btn {
+            display: inline-flex;
+            /* Use flexbox to align items in a row */
+            align-items: center;
+            /* Align items vertically */
+            background: #8a1863;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            gap: 8px;
+            /* Space between icon and text */
+        }
+
+        .download-btn img {
+            width: 20px;
+            /* Adjust icon size */
+            height: 20px;
+        }
+
+        .banner-image img {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .heading {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* General Styling */
+
+
+/* Cart Container */
+.cart-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+/* Cart Icon */
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cart-icon img {
+    width: 40px; /* Adjust based on your cart image */
+}
+
+/* Cart Badge */
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    background: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Cart Text */
+.cart-text {
+    font-weight: bold;
+}
+
+/* Responsive Design for Tablets */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin: 0;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .banner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .banner-image img {
+        max-width: 80%;
+    }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .search-bar {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu a {
+        margin: 5px 0;
+        font-size: 1em;
+    }
+
+    .banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+
+    .banner-image img {
+        max-width: 100%;
+    }
+
+    .cart-container {
+        justify-content: center;
+    }
+}
+
+/* Small Mobile Screens */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5em;
+    }
+
+    .search-bar input {
+        padding: 8px 30px;
+        font-size: 0.9em;
+    }
+
+    .cart-container {
+        flex-direction: column;
+    }
+
+    .cart-icon img {
+        width: 30px;
+    }
+
+    .cart-badge {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">meesho</div>
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+        </div>
+        <div class="nav-icons">
+            <a href="#">📥 Download App</a>
+            <a href="#">👤 Profile</a>
+            <!-- <a href="#">🛒 Cart</a>
+            <span class="cart-badge">3</span> -->
+            <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAgdJREFUSEvN1kuoTXEUx/HPlYFHpEQyIhnIxEQiEwYykMHFhJnyLAMDxUCkPAYG0i2RMnJH9w6NhIEoxUAJA4/yiGIgMvAIZ93+u3bbuef893k4Vp3B2Wf91/e/fuuxz5AB2dCAuP4L8CLEJ+wLHvRTjXLGx3GsBHuGjXjejwu0AgfvIVb0G1yWehgHEnAt7vQaPllzzcV7TMUodvwrcHCuYju+YzO+dQl/hRdFjFbjFBLf7hJWPb4V4/Gw3Rw/wvIewnfiSg54Ny4m8Clc7+ASJ7EGPzEPn3LAM/AOsxN0Q03wTHzENIxhW06NC5/zabR+Nxpuac2FUlZsE67VAS9BbLGwczhYI+u7WI0PWIBfdcDhewPr8RnzM0drcWl8zuJQ+cLturrw3ZJqFN934XJG1tGMR5LfMjztBDylAXyb5HqcMWKR0BssxP1GbVdWL5qbcZw7ihMpQMzjyxZZx+yPpN/340I34GiO12l/Zyg94fIj9cTE7HYidXHmUqpxLjiWz95mznWkjvNR66jX9Azy11TfmP+/rC44AsRSmJPqFn+RqjYL+9JqDIWaWl3waRxOkW6l2a4Gvol16eGZ0kh1VeNy0JAwpK9abKciocku1/a1WA1a3r0h454m4Gio8AuL35vKXVfqCBZbKN5W91o02Kq0Xp/0qsYZzZzn0knGeZHbeA0M/AffmVMfIK6tVQAAAABJRU5ErkJggg=="/> -->
+            <div class="cart-container">
+                <div class="cart-icon">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAgdJREFUSEvN1kuoTXEUx/HPlYFHpEQyIhnIxEQiEwYykMHFhJnyLAMDxUCkPAYG0i2RMnJH9w6NhIEoxUAJA4/yiGIgMvAIZ93+u3bbuef893k4Vp3B2Wf91/e/fuuxz5AB2dCAuP4L8CLEJ+wLHvRTjXLGx3GsBHuGjXjejwu0AgfvIVb0G1yWehgHEnAt7vQaPllzzcV7TMUodvwrcHCuYju+YzO+dQl/hRdFjFbjFBLf7hJWPb4V4/Gw3Rw/wvIewnfiSg54Ny4m8Clc7+ASJ7EGPzEPn3LAM/AOsxN0Q03wTHzENIxhW06NC5/zabR+Nxpuac2FUlZsE67VAS9BbLGwczhYI+u7WI0PWIBfdcDhewPr8RnzM0drcWl8zuJQ+cLturrw3ZJqFN934XJG1tGMR5LfMjztBDylAXyb5HqcMWKR0BssxP1GbVdWL5qbcZw7ihMpQMzjyxZZx+yPpN/340I34GiO12l/Zyg94fIj9cTE7HYidXHmUqpxLjiWz95mznWkjvNR66jX9Azy11TfmP+/rC44AsRSmJPqFn+RqjYL+9JqDIWaWl3waRxOkW6l2a4Gvol16eGZ0kh1VeNy0JAwpK9abKciocku1/a1WA1a3r0h454m4Gio8AuL35vKXVfqCBZbKN5W91o02Kq0Xp/0qsYZzZzn0knGeZHbeA0M/AffmVMfIK6tVQAAAABJRU5ErkJggg==" alt="Shopping Cart">
+                    <span class="cart-badge">3</span>
+                </div>
+                <span class="cart-text">Cart</span>
+            </div>
+        </div>
+    </div>
+    <div class="nav-menu">
+        <a href="#">Women Ethnic</a>
+        <a href="#">Women Western</a>
+        <a href="#">Men</a>
+        <a href="#">Kids</a>
+        <a href="#">Home & Kitchen</a>
+        <a href="#">Beauty & Health</a>
+        <a href="#">Jewellery & Accessories</a>
+        <a href="#">Bags & Footwear</a>
+        <a href="#">Electronics</a>
+        <a href="#">Sports & Fitness</a>
+        <a href="#">Car & Motorbike</a>
+    </div>
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Lowest Prices, Best Quality Shopping</h1>
+            <div class="benefits">
+                <div class="benefit">✔ Free Delivery</div>
+                <div class="benefit">✔ Cash on Delivery</div>
+                <div class="benefit">✔ Easy Returns</div>
+            </div>
+            <a href="#" class="download-btn"><img src="images/google-play-store.svg" alt="Play Store Icon">Download the
+                Meesho App</i></a>
+        </div>
+        <div class="banner-image">
+            <img src="images/meesho.webp" alt="Discount Banner">
+        </div>
+    </div>
+
+</body>
+
+</html>

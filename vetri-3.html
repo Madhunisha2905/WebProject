@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .top-bar {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 8px 40px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        .top-bar a:hover, .menu li a:hover, .dropdown-container a:hover {
+            color: orange;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+        .navbar .logo span:first-child {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            border: 2px solid #e64510;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-box select {
+            background: white;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            outline: none;
+            appearance: none;
+            position: relative;
+            flex: 0 0 140px;
+        }
+
+        .search-box select::-ms-expand {
+            display: none;
+        }
+
+        .search-box .dropdown-icon {
+            position: absolute;
+            left: 125px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #e64510;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .menu li {
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .dropdown-container {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 15px;
+            border-top: 3px solid #e64510;
+            flex-wrap: wrap;
+        }
+
+        .dropdown-container a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-container a i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div>Free Shipping On All Orders Over India</div>
+        <div>
+            <a href="#"><i class="fas fa-bolt"></i> Flash Sale</a>
+            <a href="#"><i class="fas fa-truck"></i> Track Order</a>
+            <a href="#"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#"><i class="fas fa-phone-alt"></i> Contact</a>
+            <a href="#"><i class="fas fa-blog"></i> Blog</a>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="logo"><span>V</span>etri <span style="color: rgb(11, 12, 12);">Electronics</span></div></div>
+        <div class="search-box">
+            <select>
+                <option>All Categories</option>
+                <option>Laptops</option>
+                <option>Smart Phones</option>
+                <option>Household Appliances</option>
+                <option>Accessories</option>
+            </select>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+            <input type="text" placeholder="Search for products">
+            <button><i class="fas fa-search"></i> SEARCH</button>
+        </div>
+        <ul class="menu">
+            <li><a href="#"><i class="fas fa-headset"></i> Need Help?</a></li>
+            <!-- <li><a href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a></li> -->
+            <li><a href="#"><i class="fas fa-user"></i> Login</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> My Cart ₦0</a></li>
+        </ul>
+    </nav>
+    <div class="dropdown-container">
+        <a href="#"><i class="fas fa-laptop"></i> Laptops</a>
+        <a href="#"><i class="fas fa-mobile-alt"></i> Smart Phones</a>
+        <a href="#"><i class="fas fa-blender"></i> Household Appliances</a>
+        <a href="#"><i class="fas fa-headphones-alt"></i> Accessories</a>
+        <a href="#"><i class="fas fa-ellipsis-h"></i> More Categories</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Products</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background: url('images/skincare.jpeg') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        /* to create a 4-column, 2-row layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            height: 320px;
+            /* to enable a flip effect */
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /* to allow 3D transformations */
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        /* to flip the card on hover */
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* prevents both sides from being visible at the same time */
+            backface-visibility: hidden;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* so it's initially hidden. */
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card img {
+            width: 70%;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 6px 0;
+        }
+
+        .product-details {
+            font-size: 12px;
+            color: #555;
+            padding: 6px;
+        }
+
+        .price {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 6px;
+            color: #d63384;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: red;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>PureDew</h1>
+    <div class="grid" id="productGrid"></div>
+    <script>
+        // runs only after the HTML has loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            const products = [
+                { name: "Face Wash", category: "Skincare", description: "Gentle cleanser for fresh skin.", image: "images/facewash.jpeg", oldPrice: "₹599", price: "₹399" },
+                { name: "Moisturizer", category: "Skincare", description: "Hydrates and nourishes your skin.", image: "images/moisturizer.jpeg", oldPrice: "₹799", price: "₹599" },
+                { name: "Sunscreen", category: "Skincare", description: "SPF 50 for ultimate sun protection.", image: "images/sunscreen.jpeg", oldPrice: "₹699", price: "₹499" },
+                { name: "Serum", category: "Skincare", description: "Brightens skin and reduces wrinkles.", image: "images/serum.jpeg", oldPrice: "₹999", price: "₹749" },
+                { name: "Toner", category: "Skincare", description: "Balances skin pH levels.", image: "images/toner.jpeg", oldPrice: "₹499", price: "₹349" },
+                { name: "Night Cream", category: "Skincare", description: "Rejuvenates skin overnight.", image: "images/night cream.jpeg", oldPrice: "₹899", price: "₹649" },
+                { name: "Eye Cream", category: "Skincare", description: "Reduces dark circles and puffiness.", image: "images/eye cream.jpeg", oldPrice: "₹799", price: "₹599" },
+                { name: "Lip Balm", category: "Skincare", description: "Moisturizes and protects lips.", image: "images/lip balm.jpeg", oldPrice: "₹299", price: "₹199" }
+            ];
+
+            const grid = document.getElementById("productGrid");
+            products.forEach(product => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <span class="heart">♥</span>
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-title">${product.name}</div>
+                            <div class="price"><span class="old-price">${product.oldPrice}</span> ${product.price}</div>
+                           
+                        </div>
+                        <div class="card-back">
+                            <div class="product-title">${product.name}</div>
+                            <div class="product-details">${product.description}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

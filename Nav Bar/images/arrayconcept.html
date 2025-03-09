@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. Creating an Array of Objects (Products)
+let products = [
+  { id: 1, name: "Laptop", price: 1000, category: "Electronics" },
+  { id: 2, name: "Phone", price: 500, category: "Electronics" },
+  { id: 3, name: "Shoes", price: 100, category: "Fashion" },
+  { id: 4, name: "Shirt", price: 50, category: "Fashion" }
+];
+ 
+// 2. Adding a New Product to the Array
+products.push({ id: 5, name: "Watch", price: 150, category: "Accessories" });
+ 
+// 3. Removing a Product from the Array (Remove by id)
+const removeProductById = (id) => {
+  products = products.filter(product => product.id !== id);
+};
+removeProductById(4);  // Remove the product with id 4 (Shirt)
+ 
+// 4. Finding a Product by Name
+const findProductByName = (name) => {
+  return products.find(product => product.name.toLowerCase() === name.toLowerCase());
+};
+let foundProduct = findProductByName("Laptop");
+console.log("Found Product:", foundProduct);
+ 
+// 5. Mapping over Array to Create a New Array with Discounted Prices
+let discountedProducts = products.map(product => {
+  return {
+    ...product, // Spread the original product properties
+    price: product.price * 0.9 // 10% discount
+  };
+});
+console.log("Discounted Products:", discountedProducts);
+ 
+// 6. Filtering Products by Category
+let electronicsProducts = products.filter(product => product.category === "Electronics");
+console.log("Electronics Products:", electronicsProducts);
+ 
+// 7. Sorting Products by Price (Ascending)
+let sortedByPrice = [...products].sort((a, b) => a.price - b.price); // Clone array to avoid mutation
+console.log("Products Sorted by Price:", sortedByPrice);
+ 
+// 8. Reducing to Calculate the Total Price of All Products
+let totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+console.log("Total Price of All Products:", totalPrice);
+ 
+// 9. Checking if All Products are Below a Certain Price
+let areAllAffordable = products.every(product => product.price < 2000);
+console.log("Are all products affordable (<2000)?", areAllAffordable);
+ 
+// 10. Checking if Any Product is in the "Fashion" Category
+let hasFashionProducts = products.some(product => product.category === "Fashion");
+console.log("Are there any fashion products?", hasFashionProducts);
+ 
+// 11. Iterating Over the Array Using forEach
+console.log("Iterating over products:");
+products.forEach(product => {
+  console.log(`Product: ${product.name}, Price: ${product.price}`);
+});
+ 
+// 12. Using Splice to Modify the Array
+products.splice(1, 1, { id: 6, name: "Tablet", price: 600, category: "Electronics" }); // Replaces product with id 2
+console.log("Products after splice (replace Phone with Tablet):", products);
+ 
+// 13. Creating a Shallow Copy of the Array
+let productsCopy = [...products];
+console.log("Shallow Copy of Products Array:", productsCopy);
+ 
+// 14. Converting Array of Product Names to a String (join)
+let productNames = products.map(product => product.name).join(", ");
+console.log("Product Names as String:", productNames);
+ 
+// Final output of products array
+console.log("Final Products Array:", products);
+ 
+    </script>
+</body>
+</html>

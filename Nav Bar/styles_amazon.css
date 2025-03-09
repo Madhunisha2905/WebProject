@@ -1,0 +1,372 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #232f3e;
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.search-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #febd69;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    position: relative;
+}
+
+.cart-icon {
+    font-size: 24px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #ff9900;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    background-color: #37475a;
+    padding: 10px 0;
+    color: white;
+    gap: 20px;
+    position: relative;
+}
+
+.categories a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    position: relative;
+}
+
+.categories a:hover {
+    text-decoration: underline;
+}
+
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #232f3e;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+}
+
+.sidebar.active {
+    display: block;
+    transform: translateX(0);
+}
+
+.sidebar .close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+}
+
+.sidebar .menu-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #3a4553;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+    top: 35px;
+    left: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.categories a:hover+.dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar.active~.banner {
+    margin-left: 250px;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.banner img.active {
+    display: block;
+}
+
+.banner .prev,
+.banner .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.banner .prev {
+    left: 10px;
+}
+
+.banner .next {
+    right: 10px;
+}
+
+.product-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.product-box,
+.sign-in-box {
+    background-color: white;
+    padding: 15px;
+    width: 23%;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.product-box h3 {
+    font-size: 16px;
+}
+
+.product-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.product-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.sign-in-box {
+    text-align: center;
+}
+
+.sign-in-box button {
+    background-color: #ff9900;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Offer Section Styling */
+.offer-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.offer-row {
+    display: flex;
+    gap: 15px;
+    width: 90%;
+    max-width: 1200px;
+    justify-content: space-between;
+}
+
+.offer-box {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    min-width: 250px;
+    text-align: center;
+}
+
+.offer-box h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.offer-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.offer-images img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Offer Links */
+.offer-box p a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007185;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.offer-box p a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Section Styling */
+.footer {
+    background-color: #232f3e;
+    color: white;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.footer-top {
+    text-align: center;
+    padding: 15px;
+    background-color: #37475a;
+}
+
+.footer-top a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-top a:hover {
+    text-decoration: underline;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    padding: 30px 10%;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    width: 200px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin: 8px 0;
+}
+
+.footer-column ul li a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 15px;
+    background-color: #131a22;
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFD814;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.signin-btn:hover {
+    background-color: #F7CA00;
+}

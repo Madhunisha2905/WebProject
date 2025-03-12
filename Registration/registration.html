@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0b1624;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 10px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    h2 {
+      color: white;
+    }
+    .input-field {
+      position: relative;
+      margin: 15px 0;
+      width: 100%;
+    }
+    .input-field input {
+      width: calc(100% - 40px);
+      padding: 10px 10px 10px 40px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid white;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+    .input-field label {
+      position: absolute;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+    .input-field input:focus ~ label,
+    .input-field input:valid ~ label {
+      top: 0;
+      font-size: 12px;
+    }
+    .input-field .icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    .remember {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: blue;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      font-size: 18px;
+      background: gray;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form id="registrationForm" action="#">
+      <h2>Registration</h2>
+      <div class="input-field">
+        <span class="icon">👤</span>
+        <input type="text" id="name" required>
+        <label>Name</label>
+      </div>
+      <div class="input-field">
+        <span class="icon">📧</span>
+        <input type="email" id="email" required>
+        <label>Email</label>
+      </div>
+      <div class="input-field">
+        <span class="icon">📞</span>
+        <input type="tel" id="phone" required>
+        <label>Phone</label>
+      </div>
+      <div class="input-field">
+        <span class="icon">📍</span>
+        <input type="text" id="city" required>
+        <label>City</label>
+      </div>
+      <div class="input-field">
+        <span class="icon">🔑</span>
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="toggle-password">👁️</span>
+        <small class="error-message"></small>
+      </div>
+      <div class="remember">
+        <input type="checkbox" id="remember">
+        <label for="remember">Remember me</label>
+      </div>
+      <button type="submit">Signup</button>
+      <p>By clicking "Signup", you acknowledge that you have read the <a href="#">Privacy Policy</a> and agree to the <a href="#">Terms of Service</a>.</p>
+      <div class="social-login">
+        <button class="social-btn">F</button>
+        <button class="social-btn">G</button>
+        <button class="social-btn">Git</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.querySelector(".toggle-password").addEventListener("click", function() {
+      const passwordInput = document.getElementById("password");
+      passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+          const registerForm = document.getElementById("registrationForm");
+          if (registerForm) {
+            registerForm.addEventListener("submit", function(event) {
+              event.preventDefault();
+              
+              const name = document.getElementById("name").value;
+              const email = document.getElementById("email").value;
+              const phone = document.getElementById("phone").value;
+              const city = document.getElementById("city").value;
+              const password = document.getElementById("password").value;
+              
+              let users = JSON.parse(localStorage.getItem("users")) || [];
+              if (users.some(user => user.email === email)) {
+                alert("Email already registered! Please log in.");
+                window.location.href = "login.html";
+                return;
+              }
+              
+              const newUser = { name, email, phone, city, password };
+              users.push(newUser);
+              localStorage.setItem("users", JSON.stringify(users));
+              alert("Registration successful! You can now log in.");
+              window.location.href = "login.html";
+            });
+          }
+        });
+  </script>
+</body>
+</html>

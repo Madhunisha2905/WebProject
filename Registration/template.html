@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electro Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .top-bar {
+            background: yellow;
+            text-align: center;
+            padding: 5px;
+            font-size: 14px;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: yellow;
+        }
+        .nav-bar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-bar input {
+            padding: 8px;
+            width: 40%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .icons span {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background: #f8f8f8;
+        }
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .sidebar {
+            flex: 1;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            background: yellow;
+            padding: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        ul li.selected {
+            background: yellow;
+            font-weight: bold;
+        }
+        .hero {
+            flex: 2;
+            background: #f0f0f0;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 10;
+        }
+        .hero button {
+            background: yellow;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            z-index: 10;
+        }
+        .banner-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .dark {
+            background: #222;
+            color: white;
+        }
+        .dark .top-bar, .dark .nav-bar, .dark .hero, .dark .sidebar h2 {
+            background: #444;
+        }
+        #sign-out {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .add-to-cart {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .checkout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .checkout-table th, .checkout-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .checkout-btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .quantity-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .cart-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cart-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        
+        <div class="nav-bar">
+            <div class="logo">
+                Electro
+                <span id="user-greeting">Hello, Guest</span>
+                <button id="sign-out">Sign Out</button>
+            </div>
+            <input type="text" id="search" placeholder="Search for Products">
+            <div class="icons">
+                <span id="theme-toggle">🌙</span>
+                <span>❤️</span>
+                <span id="user-icon" onclick="openAuthPage()">👤</span>
+                <div class="cart-container" onclick="openCheckoutPage()">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Blog</a>
+            <a href="#">Pages</a>
+            <a href="#">Features</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <ul>
+                <li onclick="changeBanner('images/gaming.jpeg', this)">Gaming Monitors Sale</li>
+                <li onclick="changeBanner('smartphones.jpg', this)">Smartphones Sale</li>
+                <li onclick="changeBanner('endseason.jpg', this)">End Season Sale</li>
+                <li onclick="changeBanner('laptops.jpg', this)">Laptops Arrivals</li>
+                <li onclick="changeBanner('earphones.jpg', this)">Earphones - 25%</li>
+                <li onclick="changeBanner('tablets.jpg', this)">Tablets 10 inch Sale</li>
+            </ul>
+        </aside>
+        <section class="hero" id="banner">
+            <h1>END SEASON SMARTPHONES</h1>
+            <p>LAST CALL FOR UP TO <strong>250</strong> OFF!</p>
+            <button id="buy-btn">Start Buying</button>
+        </section>
+        <div class="banner-image">
+            <img id="selected-banner" src="images/gaming.jpeg" alt="Banner">
+        </div>
+    </main>
+    <section class="products">
+        <div class="product-card">
+            <img src="images/laptop.jpg" alt="Laptop">
+            <h3>Laptop</h3>
+            <p>₹82,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="images/phone.jpg" alt="Phone">
+            <h3>Phone</h3>
+            <p>₹41,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="images/watch.jpg" alt="Watch">
+            <h3>Smart Watch</h3>
+            <p>₹16,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="images/earbuds.jpg" alt="Earbuds">
+            <h3>Earbuds</h3>
+            <p>₹7,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </section>
+    
+
+    
+    <script>
+        // function changeBanner(image, element) {
+        //     document.getElementById("banner").style.backgroundImage = `url(${image})`;
+        //     document.getElementById("banner").style.backgroundSize = "cover";
+        //     document.getElementById("banner").style.backgroundPosition = "center";
+
+        //     let items = document.querySelectorAll(".sidebar ul li");
+        //     items.forEach(item => item.classList.remove("selected"));
+        //     element.classList.add("selected");
+        // }
+
+        function changeBanner(image, element) {
+            const bannerImg = document.getElementById("selected-banner");
+            if (bannerImg) {
+                bannerImg.src = image;
+            }
+
+            document.querySelectorAll(".sidebar ul li").forEach(li => li.classList.remove("selected"));
+            element.classList.add("selected");
+        }
+
+
+        function openAuthPage() {
+            window.location.href = "login.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeToggle = document.getElementById("theme-toggle");
+            const body = document.body;
+
+            if (localStorage.getItem("theme") === "dark") {
+                body.classList.add("dark");
+                themeToggle.textContent = "☀️";
+            }
+
+            themeToggle.addEventListener("click", function () {
+                body.classList.toggle("dark");
+                if (body.classList.contains("dark")) {
+                    localStorage.setItem("theme", "dark");
+                    themeToggle.textContent = "☀️";
+                } else {
+                    localStorage.setItem("theme", "light");
+                    themeToggle.textContent = "🌙";
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const userGreeting = document.getElementById("user-greeting");
+            const signOutButton = document.getElementById("sign-out");
+            const storedUser = localStorage.getItem("loggedInUser");
+
+            if (storedUser) {
+                try {
+                    const user = JSON.parse(storedUser);
+                    userGreeting.textContent = `Hello, ${user.name}`;
+                    signOutButton.style.display = "inline";
+                } catch (error) {
+                    localStorage.removeItem("loggedInUser");
+                    userGreeting.textContent = "Hello, Guest";
+                    signOutButton.style.display = "none";
+                }
+            } else {
+                userGreeting.textContent = "Hello, Guest";
+                signOutButton.style.display = "none";
+            }
+
+            signOutButton.addEventListener("click", function () {
+                localStorage.removeItem("loggedInUser");
+                userGreeting.textContent = "Hello, Guest";
+                signOutButton.style.display = "none";
+            });
+        });
+
+        //addtocart
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartTotalElement = document.getElementById("cart-total");
+            let cartTotal = 0;
+
+            document.querySelectorAll(".add-to-cart").forEach(button => {
+                button.addEventListener("click", function () {
+                    const priceText = this.previousElementSibling.textContent.replace("₹", "").replace(/,/g, "");
+                    const price = parseFloat(priceText);
+                    cartTotal += price;
+                    cartTotalElement.textContent = `₹${cartTotal.toLocaleString()}`;
+                });
+            });
+        });
+
+        let cartCount = 0;
+
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function () {
+                cartCount++;
+                document.getElementById("cart-count").textContent = cartCount;
+            });
+        });
+
+        //checkout
+        let cartItems = [];
+
+document.addEventListener("DOMContentLoaded", function () {
+    const cartTotalElement = document.getElementById("cart-total");
+    let cartTotal = 0;
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function () {
+            const productName = this.previousElementSibling.previousElementSibling.textContent;
+            const priceText = this.previousElementSibling.textContent.replace("₹", "").replace(/,/g, "");
+            const price = parseFloat(priceText);
+
+            const existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({ name: productName, price: price, quantity: 1 });
+            }
+
+            cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+            cartTotalElement.textContent = `₹${cartTotal.toLocaleString()}`;
+        });
+    });
+});
+
+function openCheckoutPage() {
+    const checkoutPage = document.createElement("div");
+
+    if (cartItems.length === 0) {
+        checkoutPage.innerHTML = `
+            <div class="alert alert-warning text-center" role="alert">
+                Your cart is empty!
+                <br>
+                <button class="btn btn-primary mt-2" onclick="redirectToHome()">Continue Shopping</button>
+            </div>`;
+    } else {
+        checkoutPage.innerHTML = `
+            <h2>Checkout</h2>
+            <table class="checkout-table">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+                ${cartItems.map(item => `
+                    <tr>
+                        <td><img src="images/${item.name.toLowerCase()}.jpg" width="50"></td>
+                        <td>${item.name}</td>
+                        <td>₹${item.price}</td>
+                        <td>${item.quantity}</td>
+                        <td>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                        </td>
+                    </tr>
+                `).join("")}
+            </table>
+            <h3>Total: ₹${cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}</h3>
+           <button class="checkout-btn btn btn-success" onclick="showSuccessPopup()">Proceed to Checkout</button>
+                `;
+    }
+    document.body.innerHTML = "";
+    document.body.appendChild(checkoutPage);
+}
+
+function showSuccessPopup() {
+    if (confirm("Order Placed! Thanks for shopping. Have a nice day.")) {
+        location.reload();
+    }
+}
+
+
+
+
+function redirectToHome() {
+    location.reload();
+}
+
+function updateQuantity(productName, change) {
+    const item = cartItems.find(item => item.name === productName);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            cartItems = cartItems.filter(i => i.name !== productName);
+        }
+    }
+    openCheckoutPage();
+}    </script>
+</body>
+
+</html>

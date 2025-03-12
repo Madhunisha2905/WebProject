@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="wrapper">
+        <form id="loginForm" action="#">
+          <h2>Login</h2>
+          <div class="input-field">
+            <input type="text" id="email" required>
+            <label>Enter your email</label>
+            <small class="error-message"></small>
+          </div>
+          <div class="input-field">
+            <input type="password" id="password" required>
+            <label>Enter your password</label>
+            <small class="error-message"></small>
+          </div>
+          <div class="forget">
+            <label for="remember">
+              <input type="checkbox" id="remember">
+              <p>Remember me</p>
+            </label>
+            <a href="forgetPassword.html">Forgot password?</a>
+          </div>
+          <button type="submit">Log In</button>
+          <div class="register">
+            <p>Don't have an account? <a href="registration.html">Register</a></p>
+          </div>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+          
+          let valid = true;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const emailError = document.getElementById("email").nextElementSibling;
+          const passwordError = document.getElementById("password").nextElementSibling;
+    
+          emailError.textContent = "";
+          passwordError.textContent = "";
+    
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(email)) {
+            emailError.textContent = "Please enter a valid email address.";
+            valid = false;
+          }
+    
+          if (password.length < 6) {
+            passwordError.textContent = "Password must be at least 6 characters long.";
+            valid = false;
+          }
+          
+          if (!valid) {
+            return;
+          }
+          
+          let users = JSON.parse(localStorage.getItem("users")) || [];
+          let user = users.find(user => user.email === email);
+          
+          if (!user) {
+            alert("You are not registered! Please register first.");
+            window.location.href = "registration.html";
+          } else if (user.password !== password) {
+            alert("Incorrect password. Please try again.");
+          } else {
+            alert("Login successful!");
+            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            window.location.href = "template.html?email=" + encodeURIComponent(user.name); // Redirect to dashboard with email
+          }
+        });
+        
+        
+    </script>
+</body>
+</html>
